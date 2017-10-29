@@ -1,0 +1,84 @@
+.slider {
+	overflow: hidden; /* prevents the default scrolling behaviour on overflowing elements and hides the slides that are overflowing on the left and on the right side of the slider */
+	position: relative; /* makes this element the reference point for the absolutely positioned bullet list */
+}
+.slide-set {
+	display: flex; /* we use a flexbox as an easy way to size our slides, align them horizontally and prevent them from breaking on new lines */
+}
+.slide {
+	flex: 0 0 100%; /* this translates to: each slide should be full width */
+	position: relative; /* allows us to move our slides left and right */
+
+	left: 0; /* setting an initial value for left so the transition works */
+}
+.slide img {
+	width: 100%; /* the image should span the whole slide */
+	height: auto; /* adjust the height as needed to preserve aspect ratio */
+}
+.bullet-set {
+	position: absolute; /* lets us place out bullet points on top of the slider, or anywhere we want for that matter */
+	bottom: 15px; /* 15px of space between our bullets and the bottom of the slider */
+
+	/* centers bullets horizontally */
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	/* --- */
+}
+.bullet {
+	width: 6px;
+	height: 6px;
+  border-radius: 50%; /* makes out bullets round */
+	background: black;
+	display: inline-block;
+	margin: 0 6px; /* spacing the bullets apart so they're not clustered together */
+	opacity: .5;
+
+	/* We let our users know they can click on the bullets */
+	cursor: pointer;
+	/* --- */
+}
+.bullet.active {
+	opacity: 1;
+}
+.slide-set, .bullet-set {
+	padding:0;
+	margin:0;
+	list-style: none;
+}
+.control {
+	position: absolute;
+	padding: 60px 15px;
+	top: 50%;
+
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+
+	outline: 0;
+	background: #eee;
+	opacity: .8;
+	border-width: 1px;
+	border-color: #aaa;
+	border-style: hidden;
+
+	cursor: pointer;
+
+	transition: opacity .4s ease-out;
+}
+.control:hover {
+	opacity: 1;
+}
+.control.left {
+	left: 12px;
+	border-left-style: solid;
+}
+.control.right {
+	right: 12px;
+	border-right-style: solid;
+}
+
+@media (max-width: 768px) {
+	.slider .control {
+		display: none; /* hide the control buttons on mobile devices because they look pretty darn bad and the swipe functionality alone is better suited for such devices */
+	}
+}
